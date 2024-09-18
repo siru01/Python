@@ -1,0 +1,9 @@
+pip install Django==4.0
+pip install django-cors-headers==4.1.0
+pip install django-debug-toolbar==4.1.0
+pip install django-enumfields==2.1.1
+pip install django-eventstream==4.5.1
+pip install djangorestframework-simplejwt==5.2.2
+pip install django-storages==1.13.2
+pip install djangorestframework==3.14.0
+pip install drf-spectacular==0.26.2

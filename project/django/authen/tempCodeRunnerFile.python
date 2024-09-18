@@ -1,0 +1,51 @@
+import re
+from collections import Counter
+
+def can_generate_document(available_words: str, document: str) -> str:
+    
+    auxiliary_words = {"is", "are", "was", "were"}
+    
+  
+    def clean_and_split(text):
+        text = re.sub(r'[^\w\s]', '', text)  
+        return text.lower().split()
+    
+   
+    available_list = clean_and_split(available_words)
+    document_list = clean_and_split(document)
+    
+ 
+    available_count = Counter(available_list)
+    document_count = Counter(document_list)
+    
+    
+    utilized_words_count = 0
+    unused_words_count = len(available_list)
+    
+    
+    for word, doc_freq in document_count.items():
+        if word in auxiliary_words:
+            
+            continue
+        elif available_count[word] >= doc_freq:
+            
+            utilized_words_count += doc_freq
+            unused_words_count -= doc_freq
+        else:
+            
+            return f"false {utilized_words_count} {unused_words_count}"
+    
+    
+    unused_words_count = sum(count for word, count in available_count.items() if word not in document_count or (word in document_count and available_count[word] > document_count[word]))
+    
+    
+    return f"true {utilized_words_count} {unused_words_count}"
+
+
+#available_words = "Today weather is sunny warm the beautiful day"
+#document = "The weather is beautiful today!"
+available_words = input()
+document=input()
+result=can_generate_document(available_words, document)
+
+print(result)
